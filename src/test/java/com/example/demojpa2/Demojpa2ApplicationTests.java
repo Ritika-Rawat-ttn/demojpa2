@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Rollback;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static java.lang.System.out;
 
 
 @SpringBootTest
@@ -43,53 +44,56 @@ class Demojpa2ApplicationTests {
 		employee3.setFirstName("saurabh");
 		employee3.setLastName("kumar");
 		employee3.setAge(53);
-		employee3.setSalary(40000);
+
 		repository.save(employee2);
 		repository.save(employee1);
 		repository.save(employee);
 		repository.save(employee3);
 	}
 
-//	//JPQL TEST CASES
-
-
-	//1
-	@Test
-	public void testFindByGreaterThanAvg(){
-		Sort sort=Sort.by("age").ascending().and(Sort.by("salary").descending());
-		List<Object[]> partialData=repository.findAllEmployeeAvg(sort);
-		for (Object[] objects:partialData){
-			System.out.println(objects[0]+" "+objects[1]);
-		}
-	}
-//2
-	@Test
-	@Transactional
-	@Rollback(value = false)
-	public void testupdateSalaryOfEmployeeLessthanAvg(){
-		int salary=30000;
-		int avgsalary=repository.findAverageSalary();
-		repository.updateSalaryOfEmployeeLessthanAvg(salary,avgsalary);
-
-	}
-//3
-	@Test
-	@Transactional
-	@Rollback(value = false)
-	public void testdeleteEmployeeWithMinSalary(){
-		int minSalary=repository.findMinimumSalary();
-		repository.deleteAllEmployeeSalaryMin(minSalary);
-
-	}
+////	//JPQL TEST CASES
+//
+//
+//	//1
+//	@Test
+//	public void testFindByGreaterThanAvg(){
+//		Sort sort=Sort.by("age").ascending().and(Sort.by("salary").descending());
+//		List<Object[]> partialData=repository.findAllEmployeeAvg(sort);
+//		for (Object[] objects:partialData){
+//			System.out.println(objects[0]+" "+objects[1]);
+//		}
+//	}
+////2
+//	@Test
+//	@Transactional
+//	@Rollback(value = false)
+//	public void testupdateSalaryOfEmployeeLessthanAvg(){
+//		int salary=30000;
+//		int avgsalary=repository.findAverageSalary();
+//		repository.updateSalaryOfEmployeeLessthanAvg(salary,avgsalary);
+//
+//	}
+////3
+//	@Test
+//	@Transactional
+//	@Rollback(value = false)
+//	public void testdeleteEmployeeWithMinSalary(){
+//		int minSalary=repository.findMinimumSalary();
+//		repository.deleteAllEmployeeSalaryMin(minSalary);
+//
+//	}
 
 	//NATIVE JPQL TEST CASES
+//	@Test
+//	public void testNameEndsWithSingh(){
+//		System.out.println(repository.findAllEmployeeNameEndsWithSingh());
+//
+
 	@Test
-	public void testNameEndsWithSingh(){
-		List<Object[]> empdate= repository.findAllEmployeeNameEndsWithSingh();
-		for (Object []objects:empdate){
-			System.out.println(objects[0]+""+objects[1]+""+objects[2]);
-		}
+	public void testFindByLastNamewithsingh(){
+		System.out.println(repository.findAllEmployeeByLastNamewithsingh("singh"));
 	}
+
 
 	@Test
 	@Transactional

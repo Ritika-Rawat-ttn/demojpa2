@@ -15,33 +15,37 @@ public interface employeeRepo extends CrudRepository<Emptable,Integer> {
     @Query("select emp.firstname, emp.lastname from empTable emp where emp.salary>(select AVG(salary) from empTable)")
     List<Object[]> findAllEmployeeAvg(Sort sort);
 
-  //2
-
-    @Modifying
-    @Query("update empTable set salary=:salary where salary <:avgsalary")
-    void updateSalaryOfEmployeeLessthanAvg(@Param("salary")int salary, @Param("avgsalary") int avgsalary);
-
+//  //2
 //
+//    @Modifying
+//    @Query("update empTable set salary=:salary where salary <:avgsalary")
+//    void updateSalaryOfEmployeeLessthanAvg(@Param("salary")int salary, @Param("avgsalary") int avgsalary);
+//
+////
     @Query("select avg(salary from empTable")
     int findAverageSalary();
 //
-
-    @Query("select min(Salary) from empTable")
-    int findMinimumSalary();
-////3
-    @Modifying
-    @Query("delete from empTable where salary=:minsalary")
-    void deleteAllEmployeeSalaryMin(@Param("minsalary") int salary);
+//
+//    @Query("select min(Salary) from empTable")
+//    int findMinimumSalary();
+//////3
+//    @Modifying
+//    @Query("delete from empTable where salary=:minsalary")
+//    void deleteAllEmployeeSalaryMin(@Param("minsalary") int salary);
 //
 //
 //
 ////NATIVE JPQL repo
-    @Query(value="select id,firstname,age from employee where lastname like '%singh' ",nativeQuery = true)
-    List<Object[]> findAllEmployeeNameEndsWithSingh();
+//    @Query(value="select empid,empfirstname,empage from emptable where emplastname like '%singh' ",nativeQuery = true)
+//    List<Emptable> findAllEmployeeNameEndsWithSingh();
+
+    @Query(value = "select * from emptable where empLastName=:lastName", nativeQuery = true)
+    List<Emptable> findAllEmployeeByLastNamewithsingh(@Param("lastName") String lastName);
+
 
 
     @Modifying
-    @Query(value = "delete from employee where age>:age",nativeQuery = true)
+    @Query(value = "delete from emptable where empage>:age",nativeQuery = true)
     void deleteAllEmployeeAgeGreaterThan(@Param("age") int age);
 
 
