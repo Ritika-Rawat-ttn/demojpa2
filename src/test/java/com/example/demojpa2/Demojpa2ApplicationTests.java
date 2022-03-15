@@ -55,33 +55,33 @@ class Demojpa2ApplicationTests {
 //
 //
 //	//1
-//	@Test
-//	public void testFindByGreaterThanAvg(){
-//		Sort sort=Sort.by("age").ascending().and(Sort.by("salary").descending());
-//		List<Object[]> partialData=repository.findAllEmployeeAvg(sort);
-//		for (Object[] objects:partialData){
-//			System.out.println(objects[0]+" "+objects[1]);
-//		}
-//	}
-////2
-//	@Test
-//	@Transactional
-//	@Rollback(value = false)
-//	public void testupdateSalaryOfEmployeeLessthanAvg(){
-//		int salary=30000;
-//		int avgsalary=repository.findAverageSalary();
-//		repository.updateSalaryOfEmployeeLessthanAvg(salary,avgsalary);
-//
-//	}
+	@Test
+	public void testFindByGreaterThanAvg(){
+		Sort sort=Sort.by("age").ascending().and(Sort.by("salary").descending());
+		List<Object[]> partialData=repository.findAllEmployeeAvg(sort);
+		for (Object[] objects:partialData){
+			System.out.println(objects[0]+" "+objects[1]);
+		}
+	}
+//2
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	public void testupdateSalaryOfEmployeeLessthanAvg(){
+		int salary=30000;
+		int avgsalary=repository.findAverageSalary();
+		repository.updateSalaryOfEmployeeLessthanAvg(salary,avgsalary);
+
+	}
 ////3
-//	@Test
-//	@Transactional
-//	@Rollback(value = false)
-//	public void testdeleteEmployeeWithMinSalary(){
-//		int minSalary=repository.findMinimumSalary();
-//		repository.deleteAllEmployeeSalaryMin(minSalary);
-//
-//	}
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	public void testdeleteEmployeeWithMinSalary(){
+		int minSalary=repository.findMinimumSalary();
+		repository.deleteAllEmployeeSalaryMin(minSalary);
+
+	}
 
 	//NATIVE JPQL TEST CASES
 //	@Test
